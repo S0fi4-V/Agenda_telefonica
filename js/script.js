@@ -86,4 +86,4 @@ const app = Vue.createApp({
 
 });
 
-const app1 = app.mount('#componente')
+const app1 = app.mount('#componente')// trigger deploy
