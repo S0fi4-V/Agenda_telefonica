@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <section id="componente" class="text-center">
+        <header>
+            <h1 class="text-center text-white" style="background-color: rgb(116, 64, 213); font-size: 3em;">Agenda Teléfonica</h1>
+        </header>
+
+        <br> <br>
+
+    <article>
+            <h4 class="pb-4" style="font-size: 30px;">Agregar Contacto</h4>
+            <br>
+            <div class="row g-2">
+                <div class="col-6 ms-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInputGrid" placeholder="Nombre"
+                            required="nombre" v-model="nombre">
+                        <label for="floatingInputGrid">Nombre(s)</label>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="floatingInputGrid" placeholder="Nombre"
+                            required="Apellidos" v-model="apellido">
+                        <label for="floatingInputGrid">Apellido</label>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row g-2">
+                <div class="col-6 ms-4">
+                    <div class="form-floating">
+                        <input type="number" class="form-control" id="floatingInputGrid" placeholder="477725665" v-model="telefono">
+                        <label for="floatingInputGrid">Teléfono</label>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="form-floating" v-bind:class="[categoria]">
+                        <select v-model="categoria" class="form-select" id="floatingSelectGrid">
+                            <option selected>Elige una opción</option>
+                            <option value="1">Familia</option>
+                            <option value="2">Amigos</option>
+                            <option value="3">Trabajo</option>
+                        </select>
+                        <label for="floatingSelectGrid">Categoría</label>
+                    </div>
+                </div>
+            </div>
+            <br>
+             <button @click="agregarContacto()" type="button" class="btn px-4 text-white" style="background-color: rgb(57, 3, 133); font-size: 15px; font-weight: bold;">Agregar</button>
+        
+            </article>
+
+        <br> <br> <br> <br>
+
+        <article>
+        <h2 class="text-center"><span style="color: blueviolet; font-weight: bold; align-items: center;">Nuevos </span>Contactos</h2>
+        <br>
+        <table class="table ms-4 me-3">
+            <thead>
+                <tr>
+                    <th scope="col"> </th>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Categoría</th>
+                    <th scope="col">Mensajes
+                    <i class="bi bi-chat-fill"></i>
+                    </th>
+                    <th scope="col">Llamadas 
+                    <i class="bi bi-telephone-fill bi-success"></i>
+                    </th>
+
+
+    </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(contacto,index) in contactos" :key="index">
+             <td> 
+                <button @click="eliminarContacto(index)" class="btn btn-link text-danger p-0 border-0 fa-4">
+                <i class="bi bi-person-fill-dash fs-4"></i></td>
+                <th scope="row">{{index+1}}</th>
+                <td>{{contacto.nombre}}</td>
+                <td>{{contacto.apellido}}</td>
+                <td>{{obtenerCategoria(contacto.categoria)}}</td>
+                <td class="text-center">
+                   <button @click="contacto.mensajes--" :disabled="contacto.mensajes <= 0" class="btn btn-outline-danger btn-sm border-0">
+                   <i class="bi bi-dash-circle fs-5"></i>
+                   </button>
+                <span class="fw-bold" style="min-width: 20px;">{{contacto.mensajes}}</span>
+                   <button @click="contacto.mensajes++" :disabled="contacto.mensajes >= 10" class="btn btn-outline-primary btn-sm border-0">
+                   <i class="bi bi-plus-circle fs-5"></i>
+                    </button>
+            </td>
+            <td class="text-center">
+                   <button @click="contacto.llamadas--" :disabled="contacto.llamadas <= 0" class="btn btn-outline-danger btn-sm border-0">
+                   <i class="bi bi-dash-circle fs-5"></i>
+                   </button>
+                <span class="fw-bold" style="min-width: 20px;">{{contacto.llamadas}}</span>
+                   <button @click="contacto.llamadas++" :disabled="contacto.llamadas >= 10" class="btn btn-outline-primary btn-sm border-0">
+                   <i class="bi bi-plus-circle fs-5"></i>
+                    </button>
+             </td>
+            </tr>
+            </tbody>
+        <tfoot class="table-light">
+            <tr style="background-color: #f8f9fa;">
+            <th colspan="4" class="text-end">Contactos: {{cantidadContactos}}</th>
+            <th class="text-end">Total de:</th>
+            <th class="text-center">
+                <i class="bi bi-chat-fill " style="color: rgb(37, 217, 172);"></i> {{ cantidadMensajes }}
+         </th>
+        <th class="text-center">
+            <i class="bi bi-telephone-fill" style="color: rgb(58, 140, 234);"></i> {{ cantidadLlamadas }}
+            </th>
+            </tr>
+        </tfoot>
+    </table>
+ </article>
+
+
+    </section>
+
+    <br> <br>
+    
+    
+
+
+    <script src="../js/vue_35.js"></script>
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
